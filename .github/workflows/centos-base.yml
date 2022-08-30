@@ -1,0 +1,22 @@
+name: CentOS Base Image
+on:
+  # schedule:
+  # - cron: '0 0 1 * *'
+  push:
+    branches:
+     - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       run: |
+         docker login ghcr.io
+     - name: Running Build
+       run: |
+         docker build -t ghcr.io/itechpros/centos:7 centos-base
+     - name: Uploading Image
+       run: |
+         docker push ghcr.io/itechpros/centos:7 centos-base
