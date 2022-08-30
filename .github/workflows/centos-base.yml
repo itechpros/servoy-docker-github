@@ -12,8 +12,11 @@ jobs:
      - name: Checkout
        uses: actions/checkout@v2
      - name: Docker Login
-       run: |
-         docker login ghcr.io
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
      - name: Running Build
        run: |
          docker build -t ghcr.io/itechpros/centos:7 centos-base
