@@ -22,4 +22,4 @@ jobs:
          docker build -t ghcr.io/itechpros/centos:7 centos-base
      - name: Uploading Image
        run: |
-         docker push ghcr.io/itechpros/centos:7 centos-base
+         docker push ghcr.io/itechpros/centos:7
