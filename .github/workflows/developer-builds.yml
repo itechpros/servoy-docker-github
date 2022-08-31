@@ -21,28 +21,40 @@ jobs:
     needs: authenticate
     steps:
      - name: Test
+       run: |
+         echo Hello world!
   build-servoy-7:
     runs-on: ubuntu-latest
     needs: authenticate
     steps:
      - name: Test
+       run: |
+         echo Hello world!
   build-servoy-8:
     runs-on: ubuntu-latest
     needs: authenticate
     steps:
      - name: Test
+       run: |
+         echo Hello world!
   build-servoy-2020:
     runs-on: ubuntu-latest
     needs: authenticate
     steps:
      - name: Test
+       run: |
+         echo Hello world!
   build-servoy-2021:
     runs-on: ubuntu-latest
     needs: authenticate
     steps:
      - name: Test
+       run: |
+         echo Hello world!
   build-servoy-2022:
     runs-on: ubuntu-latest
     needs: authenticate
     steps:
      - name: Test
+       run: |
+         echo Hello world!
