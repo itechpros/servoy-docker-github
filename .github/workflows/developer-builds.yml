@@ -40,13 +40,50 @@ jobs:
      - name: Build Servoy 6.1.0 (1418) images
        run: |
          docker build -t ghcr.io/itechpros/servoy_installer:6.1.0.1418-jdk8 --build-arg SERVOY_VERSION_MAJOR=6 --build-arg SERVOY_VERSION_BUILD=1418 developer-base-jar
-  # build-servoy-7:
-  #   runs-on: ubuntu-latest
-  #   needs: authenticate
-  #   steps:
-  #    - name: Test
-  #      run: |
-  #        echo Hello world!
+  build-servoy-7:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+     - name: Create OpenJDK 8 base image
+       run: |
+         docker build -t itechpros/openjdk:8 openjdk-8-base
+     - name: Build Servoy 7.4.5 (2040) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.4.5.2040-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2040 developer-base-jar 
+     - name: Build Servoy 7.4.4 (2038) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.4.4.2038-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2038 developer-base-jar
+     - name: Build Servoy 7.4.3 (2035) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.4.3.2035-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2035 developer-base-jar
+     - name: Build Servoy 7.4.2 (2032) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.4.2.2032-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2032 developer-base-jar
+     - name: Build Servoy 7.4.1 (2027) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.4.1.2027-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2027 developer-base-jar
+     - name: Build Servoy 7.4.0 (2025) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.4.0.2025-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2025 developer-base-jar
+     - name: Build Servoy 7.3.1 (2021) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.3.1.2021-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2025 developer-base-jar
+     - name: Build Servoy 7.3.0 (2017) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.3.1.2017-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2017 developer-base-jar
+     - name: Build Servoy 7.2.0 (2012) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.2.0.2012-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2012 developer-base-jar
+     - name: Build Servoy 7.0.0 (2007) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:7.0.0.2007-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=2007 developer-base-jar
   # build-servoy-8:
   #   runs-on: ubuntu-latest
   #   needs: authenticate
