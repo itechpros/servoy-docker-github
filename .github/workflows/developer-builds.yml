@@ -45,13 +45,26 @@ jobs:
      - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
        run: |
          docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}}-jdk8 --build-arg SERVOY_VERSION_MAJOR=7 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-jar
-  # build-servoy-8:
-  #   runs-on: ubuntu-latest
-  #   needs: authenticate
-  #   steps:
-  #    - name: Test
-  #      run: |
-  #        echo Hello world!
+  build-servoy-8:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [{build: 3401, name: 8.4.0}, {build: 3208, name: 8.3.3}, {build: 3206, name: 8.3.2}, {build: 3204, name: 8.3.1}, {build: 3202, name: 8.3.0}, {build: 3108, name: 8.2.3}, {build: 3106, name: 8.2.2}, {build: 3104, name: 8.2.1}, {build: 3102, name: 8.2.0}, {build: 3034, name: 8.1.4}, {build: 3032, name: 8.1.3}, {build: 3030, name: 8.1.2}, {build: 3028, name: 8.1.1}, {build: 3026, name: 8.1.0}, {build: 3019, name: 8.0.0}]
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+     - name: Create OpenJDK 8 base image
+       run: |
+         docker build -t itechpros/openjdk:8 openjdk-8-base
+     - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}}-jdk8 --build-arg SERVOY_VERSION_MAJOR=8 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-jar
   # build-servoy-2020:
   #   runs-on: ubuntu-latest
   #   needs: authenticate
