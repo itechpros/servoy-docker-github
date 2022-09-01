@@ -65,24 +65,96 @@ jobs:
      - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
        run: |
          docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}}-jdk8 --build-arg SERVOY_VERSION_MAJOR=8 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-jar
-  # build-servoy-2020:
-  #   runs-on: ubuntu-latest
-  #   needs: authenticate
-  #   steps:
-  #    - name: Test
-  #      run: |
-  #        echo Hello world!
-  # build-servoy-2021:
-  #   runs-on: ubuntu-latest
-  #   needs: authenticate
-  #   steps:
-  #    - name: Test
-  #      run: |
-  #        echo Hello world!
-  # build-servoy-2022:
-  #   runs-on: ubuntu-latest
-  #   needs: authenticate
-  #   steps:
-  #    - name: Test
-  #      run: |
-  #        echo Hello world!
+  build-servoy-2019-jar:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [{build: 3413, name: 2019.03.1}, {build: 3412, name: 2019.03}]
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+     - name: Create OpenJDK 8 base image
+       run: |
+         docker build -t itechpros/openjdk:8 openjdk-8-base
+     - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}}-jdk8 --build-arg SERVOY_VERSION_MAJOR=8 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-jar 
+  build-servoy-2019-zip:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [{build: 3543, name: 2019.12.1}, {build: 3542, name: 2019.12}, {build: 3522, name: 2019.09}, {build: 3504, name: 2019.06.2}, {build: 3503, name: 2019.06.1}, {build: 3502, name: 2019.06}, {build: 3414, name: 2019.03.2}]
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+     - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}} --build-arg SERVOY_VERSION_MAJOR=8 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-targz 
+  build-servoy-2020:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [{build: 3623, name: 2020.12.1}, {build: 3622, name: 2020.12}, {build: 3602, name: 2020.09}, {build: 3583, name: 2020.06.1}, {build: 3582, name: 2020.06}, {build: 3565, name: 2020.03.3}, {build: 3564, name: 2020.03.2}, {build: 3563, name: 2020.03.1}, {build: 3562, name: 2020.03}]
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+     - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}} --build-arg SERVOY_VERSION_MAJOR=8 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-targz 
+  build-servoy-2021:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [{build: 3724, name: 2021.12.2}, {build: 3723, name: 2021.12.1}, {build: 3722, name: 2021.12}, {build: 3703, name: 2021.09}, {build: 3683, name: 2021.06}, {build: 3645, name: 2021.03.3}, {build: 3644, name: 2021.03.2}, {build: 3643, name: 2021.03.1}, {build: 3642, name: 2021.03}]
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+     - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}} --build-arg SERVOY_VERSION_MAJOR=8 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-targz 
+  build-servoy-2022:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [{build: 3782, name: 2022.06}, {build: 3744, name: 2022.03.2}, {build: 3743, name: 2022.03.1}, {build: 3742, name: 2022.03}]
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: Docker Login
+       uses: docker/login-action@v2
+       with:
+         registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.GITHUB_TOKEN }}
+     - name: Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
+       run: |
+         docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}} --build-arg SERVOY_VERSION_MAJOR=8 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-targz 
