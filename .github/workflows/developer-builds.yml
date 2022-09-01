@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [{build: 2040, name: 7.4.5}, {build: 2038, name: 7.4.4}, {build: 2035, name: 7.4.3}, {build: 2032, name: 7.4.2}, {build: 2027, name: 7.4.1}, {build: 2025, name: 7.4.0}, {build: 2021, name: 7.3.1}, {build: 2017, name: 7.3.0}, {build: 2012, name: 7.2.0}]
+        version: [{build: 2049, name: 7.4.10}, {build: 2047, name: 7.4.9}, {build: 2046, name: 7.4.8}, {build: 2045, name: 7.4.7}, {build: 2043, name: 7.4.6}, {build: 2041, name: 7.4.5}, {build: 2039, name: 7.4.4}, {build: 2036, name: 7.4.3}, {build: 2033, name: 7.4.2}, {build: 2028, name: 7.4.1}, {build: 2026, name: 7.4.0}, {build: 2022, name: 7.3.1}, {build: 2018, name: 7.3.0}, {build: 2013, name: 7.2.0}]
     steps:
      - name: Checkout
        uses: actions/checkout@v2
