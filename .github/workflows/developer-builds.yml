@@ -22,7 +22,7 @@ jobs:
      - name: Create OpenJDK 8 base image
        run: |
          docker build -t itechpros/openjdk:8 openjdk-8-base
-     - name: Build Servoy ${{matrix.version.name}} (${{{matrix.version.build}}) images
+     - name: 25 Build Servoy ${{matrix.version.name}} (${{matrix.version.build}}) images
        run: |
          docker build -t ghcr.io/itechpros/servoy_installer:${{matrix.version.name}}.${{matrix.version.build}}-jdk8 --build-arg SERVOY_VERSION_MAJOR=6 --build-arg SERVOY_VERSION_BUILD=${{matrix.version.build}} developer-base-jar
   build-servoy-7:
