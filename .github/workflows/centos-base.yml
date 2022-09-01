@@ -1,7 +1,10 @@
 name: CentOS Base Image
 on:
-  schedule:
-  - cron: '0 0 1 * *'
+  # schedule:
+  # - cron: '0 0 1 * *'
+  push:
+    branches:
+     - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,4 +24,4 @@ jobs:
        run: |
          docker push ghcr.io/itechpros/centos:7
      - name: Start Developer Image Builds
-       uses: ./.github/workflows/developer-builds
+       uses: ./.github/workflows/developer-builds.yml
