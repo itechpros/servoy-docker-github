@@ -5,6 +5,7 @@ on:
   push:
     branches:
      - main
+concurrency: centos_base
 jobs:
   build:
     runs-on: ubuntu-latest

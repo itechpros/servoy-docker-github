@@ -4,6 +4,7 @@ on:
   #   branches:
   #    - main
   workflow_call:
+concurrency: developer_builds
 jobs:
   build-servoy-6:
     runs-on: ubuntu-latest
