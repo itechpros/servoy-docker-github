@@ -26,3 +26,6 @@ jobs:
          docker push ghcr.io/itechpros/centos:7
      - name: Start Developer Image Builds
        uses: ./.github/workflows/developer-builds.yml
+       with:
+         path: ${{ github.repository }}
+         fetch-depth: 0
